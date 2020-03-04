@@ -86,7 +86,7 @@ export const Dashboard = () => {
   return (
     <div className={classes.root}>
       <AppBar position="absolute" className={classes.appBar}>
-        <Country name="ca" />
+        <Country name={selectedCountry} />
       </AppBar>
       <Drawer
         variant="permanent"
@@ -120,6 +120,7 @@ export const Dashboard = () => {
           </Grid>
         </Container>
       </main>
+    
     </div>
   );
 };
