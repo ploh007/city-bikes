@@ -12,7 +12,7 @@ import Cities from './Cities.jsx';
 import { useSelector } from 'react-redux';
 
 const drawerWidth = 80;
-const networksAPI = `http://api.citybik.es/v2/networks`;
+const networksAPI = `https://api.citybik.es/v2/networks`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
