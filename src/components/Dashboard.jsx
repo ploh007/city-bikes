@@ -6,26 +6,12 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import * as colors from '../theme.js';
 import Country from './Country';
-import City from './City';
-import { uniq } from 'lodash';
+import { groupBy, keys } from 'lodash';
 import Typography from '@material-ui/core/Typography';
-
-const cities = [
-  {
-    name: 'Toronto, CA',
-    bikesAvailable: 673,
-    totalBikes: 1341,
-    companies: ['Company1', 'Company2'],
-  },
-  {
-    name: 'Toronto, CA',
-    bikesAvailable: 673,
-    totalBikes: 1341,
-    companies: ['Company1', 'Company2'],
-  },
-];
+import Cities from './Cities.jsx';
 
 const drawerWidth = 80;
+const selectedCountry = "CA";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,21 +52,21 @@ export const filterNetworks = ({ networks }, latitude, longitude) => {
   return networks.filter((network) => network.location.latitude < latitude && network.location.longitude < longitude);
 };
 
-export const getUniqueCountries = (networks) => {
-  return uniq(networks.map((network) => network.location.country));
+export const groupNetworksByCountry = (networks) => {
+  return groupBy(networks, 'location.country');
 };
+
+const networksAPI = `http://api.citybik.es/v2/networks`;
 
 export const Dashboard = () => {
   const classes = useStyles();
 
   const [isLoading, setIsLoading] = useState(true);
   const [countries, setCountries] = useState(null);
-  const [networks, setNetworks] = useState(null);
-
 
   // Call to invoke network API to obtain networks and countries list.
   useEffect(() => {
-    fetch(`http://api.citybik.es/v2/networks`, {
+    fetch(networksAPI, {
       method: 'GET',
       headers: new Headers({
         Accept: 'application/json',
@@ -89,8 +75,7 @@ export const Dashboard = () => {
       .then((res) => res.json())
       .then((response) => {
         const networksData = filterNetworks(response, 50, -50);
-        const countriesData = getUniqueCountries(networksData);
-        setNetworks(networksData);
+        const countriesData = groupNetworksByCountry(networksData);
         setCountries(countriesData);
         setIsLoading(false);
       })
@@ -113,7 +98,7 @@ export const Dashboard = () => {
             ...
           </Typography>
         ) : (
-          countries.map((item, index) => {
+          keys(countries).map((item, index) => {
             return <Country key={index} name={item} />;
           })
         )}
@@ -122,13 +107,7 @@ export const Dashboard = () => {
         <div className={classes.appBarSpacer} />
         <Container className={classes.container}>
           <Grid container spacing={3}>
-            {cities.map((item, index) => {
-              return (
-                <Grid item key={index} xs={12}>
-                  <City {...item} />
-                </Grid>
-              );
-            })}
+            {!isLoading && <Cities cities={countries[selectedCountry]} />}
           </Grid>
         </Container>
       </main>
