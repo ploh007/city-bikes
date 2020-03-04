@@ -8,6 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
+const bikesAvailable = 0;
+const totalBikes = 0;
+
 const useStyles = makeStyles(() => ({
   root: {
     flex: 1,
@@ -19,9 +22,6 @@ const useStyles = makeStyles(() => ({
 
 export const City = ({ name, id, companies }) => {
   const classes = useStyles();
-
-  const bikesAvailable = 0;
-  const totalBikes = 0;
 
   return (
     <Card className={classes.root}>

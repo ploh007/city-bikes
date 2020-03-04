@@ -2,6 +2,8 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
+import { useDispatch } from 'react-redux'
+import { selectCountry } from '../redux';
 import * as colors from '../theme';
 
 const useStyles = makeStyles(() => ({
@@ -16,6 +18,7 @@ const useStyles = makeStyles(() => ({
 
 export const Country = ({ name, selected }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <Button
@@ -23,6 +26,7 @@ export const Country = ({ name, selected }) => {
         root: classes.button,
       }}
       className={selected ? classes.selected : ''}
+      onClick={() => dispatch(selectCountry(name))}
       disableRipple
       disableElevation
     >

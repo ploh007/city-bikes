@@ -9,9 +9,10 @@ import Country from './Country';
 import { groupBy, keys } from 'lodash';
 import Typography from '@material-ui/core/Typography';
 import Cities from './Cities.jsx';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 80;
-const selectedCountry = 'CA';
+const networksAPI = `http://api.citybik.es/v2/networks`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,13 +57,13 @@ export const groupNetworksByCountry = (networks) => {
   return groupBy(networks, 'location.country');
 };
 
-const networksAPI = `http://api.citybik.es/v2/networks`;
-
 export const Dashboard = () => {
   const classes = useStyles();
 
   const [isLoading, setIsLoading] = useState(true);
   const [countries, setCountries] = useState(null);
+
+  const selectedCountry = useSelector((state) => state.country)
 
   // Call to invoke network API to obtain networks and countries list.
   useEffect(() => {
@@ -80,7 +81,7 @@ export const Dashboard = () => {
         setIsLoading(false);
       })
       .catch(() => {});
-  }, []);
+  }, [selectedCountry]);
 
   return (
     <div className={classes.root}>
@@ -99,7 +100,7 @@ export const Dashboard = () => {
           </Typography>
         ) : (
           keys(countries).map((item, index) => {
-            return <Country key={index} name={item} />;
+            return <Country key={index} name={item} selected={selectedCountry === item? true : false} />;
           })
         )}
       </Drawer>
