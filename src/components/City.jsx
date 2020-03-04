@@ -42,7 +42,6 @@ export const City = ({ name, bikesAvailable, totalBikes, companies }) => {
                 classes={{
                   root: classes.listItem,
                 }}
-                disablePadding
                 key={index}
               >
                 <ListItemText primary={item} />
