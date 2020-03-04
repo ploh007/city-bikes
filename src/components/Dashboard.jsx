@@ -3,25 +3,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import * as colors from '../theme.js';
+import Country from './Country';
 
 const drawerWidth = 80;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
-    backgroundColor: colors.darkBackground
+    backgroundColor: colors.darkBackground,
   },
   appBar: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    backgroundColor: colors.header
+    backgroundColor: colors.header,
   },
   title: {
     flexGrow: 1,
@@ -30,11 +25,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
-    backgroundColor: colors.sideBar
-  },
-  listItem: {
-    paddingBottom: theme.spacing(2.5),
-    paddingTop: theme.spacing(2.5),
+    backgroundColor: colors.sideBar,
   },
   content: {
     flexGrow: 1,
@@ -49,11 +40,7 @@ export const Dashboard = () => {
   return (
     <div className={classes.root}>
       <AppBar position="absolute" className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            City Bikes
-          </Typography>
-        </Toolbar>
+          <Country name="ca" />
       </AppBar>
       <Drawer
         variant="permanent"
@@ -61,14 +48,7 @@ export const Dashboard = () => {
           paper: classes.drawerPaper,
         }}
       >
-        <List disablePadding>
-          <ListItem button className={classes.listItem}>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-          </ListItem>
-          <Divider />
-        </List>
+        <Country name="ca" />
       </Drawer>
       <main className={classes.content}></main>
     </div>
