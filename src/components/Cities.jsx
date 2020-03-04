@@ -13,7 +13,6 @@ class CityService {
 }
 
 export const Cities = ({ cities }) => {
-  
   const cityList = cities.map((city) => new CityService(city));
 
   return (

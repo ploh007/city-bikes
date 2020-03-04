@@ -8,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-
 const useStyles = makeStyles(() => ({
   root: {
     flex: 1,
@@ -20,7 +19,7 @@ const useStyles = makeStyles(() => ({
 
 export const City = ({ name, id, companies }) => {
   const classes = useStyles();
-  
+
   const bikesAvailable = 0;
   const totalBikes = 0;
 
@@ -31,12 +30,12 @@ export const City = ({ name, id, companies }) => {
           {name}
         </Typography>
         <Typography align="center" variant="h5" component="h5">
-          {Math.round(bikesAvailable / totalBikes * 100, 1)} %
+          {Math.round((bikesAvailable / totalBikes) * 100, 1)} %
         </Typography>
         <Typography variant="body1" component="p" gutterBottom>
           {bikesAvailable} / {totalBikes}
         </Typography>
-        <Typography variant="body1" component="p" >
+        <Typography variant="body1" component="p">
           Companies
         </Typography>
         <List dense disablePadding>

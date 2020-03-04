@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Cities from './Cities.jsx';
 
 const drawerWidth = 80;
-const selectedCountry = "CA";
+const selectedCountry = 'CA';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
   },
   loadingText: {
-    color: '#ffffff',
+    color: colors.text,
   },
 }));
 
@@ -94,7 +94,7 @@ export const Dashboard = () => {
         }}
       >
         {isLoading ? (
-          <Typography variant="h1" align="center" className={classes.loadingText}>
+          <Typography variant="h1" align="center" color="secondary">
             ...
           </Typography>
         ) : (
@@ -107,7 +107,15 @@ export const Dashboard = () => {
         <div className={classes.appBarSpacer} />
         <Container className={classes.container}>
           <Grid container spacing={3}>
-            {!isLoading && <Cities cities={countries[selectedCountry]} />}
+            {isLoading ? (
+              <Grid item xs={12}>
+                <Typography variant="h1" align="center" className={classes.loadingText}>
+                  Loading ...
+                </Typography>
+              </Grid>
+            ) : (
+              <Cities cities={countries[selectedCountry]} />
+            )}
           </Grid>
         </Container>
       </main>
