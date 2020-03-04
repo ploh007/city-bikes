@@ -9,16 +9,19 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import * as colors from '../theme.js';
 
 const drawerWidth = 80;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    backgroundColor: colors.darkBackground
   },
   appBar: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
+    backgroundColor: colors.header
   },
   title: {
     flexGrow: 1,
@@ -27,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
+    backgroundColor: colors.sideBar
   },
   listItem: {
     paddingBottom: theme.spacing(2.5),
